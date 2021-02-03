@@ -9,11 +9,12 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+
 @RestController
 public class DateController {
 
     @GetMapping(value = "/date", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<String> returnDateTimeFluxStream() {
+    public Flux<String> createDateTimeFluxStream() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         return Flux.interval(Duration.ofSeconds(1)).map(l -> dtf.format(LocalDateTime.now())).log();
     }
